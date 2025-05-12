@@ -1,0 +1,101 @@
+package br.com.Apoex;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import br.com.vemprafam.pojo.Funcionario;
+
+public class DaoAdministrador {
+	private Connection connection;
+
+	private String url = "jdbc:hsqldb:hsql://localhost/";
+	private String user = "SA";
+	private String password = "";
+
+	public DaoAdministrador() {
+		try {
+			connection = DriverManager.getConnection(url,user,password);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void insert(Adminstrador administrador) {
+		String sql = "INSERT INTO ADMINSTRADOR VALUES(?,?,?,?)";
+		try {
+			PreparedStatement pstmt = connection.prepareStatement(sql);
+			pstmt.setInt(1, administrador.getRe());
+			pstmt.setString(2, administrador.getRg());
+			pstmt.setDouble(3, administrador.getCpf());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void delete(Administrador administrador) {
+		String sql = "DELETE FROM ADMINISTADOR WHERE RE = ?";
+		try {
+			PreparedStatement pstmt = connection.prepareStatement(sql);
+			pstmt.setInt(1, administrador.getRe());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void update(Administrador administrador) {
+		String sql = "UPDATE ADMINISTRADOR SET RG=?, SET CPF=?, WHERE RE=?";
+		try {
+			PreparedStatement pstmt = connection.prepareStatement(sql);
+			pstmt.setString(1, administrador.getRg());
+			pstmt.setString(2,administrador.getCpf);
+			pstmt.setInt(3, administrador.getRe());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public List<Administrador> getLista() {
+		String sql = "SELECT * FROM ADMINISTRADOR";
+		List<Administrador> lista = new ArrayList<Administrador>();
+		try {
+			PreparedStatement pstmt = connection.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				int re = rs.getInt(1);
+				String rg = rs.getString(2);
+				String cpf = rs.getString(3);
+				lista.add(new Administrador(re,rg,cpf));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return lista;
+	}
+
+	public Administrador buscarPeloRe(int re) {
+		String sql = "SELECT * FROM Administrador WHERE RE=?";
+		try {
+			PreparedStatement pstmt = connection.prepareStatement(sql);
+			pstmt.setInt(1, re);
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				String rg = rs.getString(2);
+				String cpf = rs.getString(3);
+				return new Administrador(re,rg,cpf);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+}
