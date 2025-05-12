@@ -1,0 +1,10 @@
+spring.application.name=Projeto
+spring.thymeleaf.prefix=classpath:/templates/
+spring.thymeleaf.suffix=.html
+spring.thymeleaf.mode=HTML
+spring.thymeleaf.cache=false
+spring.datasource.url=jdbc:hsqldb:hsql://localhost/
+spring.datasource.driver-class-name=org.hsqldb.jdbc.JDBCDriver
+spring.datasource.username=SA
+spring.datasource.password=
+
