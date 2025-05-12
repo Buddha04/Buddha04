@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Lista de Administrador</title>
+</head>
+<body>
+<table border='1'>
+<tr>
+<th>RA</th><th>RG</th><th>CPF</th>
+</tr>
+<tr th:each="administrador: ${administrador}">
+<td th:text="${administrador.re}">RE</td>
+<td th:text="${administrador.CPF}">CPF</td>
+</tr>
+</table>
+<a href="/administrador">voltar</a>
+</body>
+</html>
