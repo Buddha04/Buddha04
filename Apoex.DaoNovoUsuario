@@ -1,0 +1,47 @@
+package br.com.Apoex;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import br.com.vemprafam.pojo.Aluno;
+
+public class DaoNovoUsuatio {
+
+	private Connection connection;
+
+	private String url = "jdbc:hsqldb:hsql://localhost/";
+	private String user = "SA";
+	private String password = "";
+
+	public DaoNovoUsuario() {
+		try {
+			connection = DriverManager.getConnection(url,user,password);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void insert(NovoUsuario novousuario) {
+		String sql = "INSERT INTO NOVOUSUARIO VALUES(?,?,?,?)";
+		try {
+			PreparedStatement pstmt = connection.prepareStatement(sql);
+			pstmt.setString(1, novousuario.getNome());
+			pstmt.setString(2, novousuario.getEmail());
+			pstmt.setString(3, novousuario.getSenha());
+			pstmt.setString(4, novousuario.getConfsenha());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+		return null;
+	}
+
+}
