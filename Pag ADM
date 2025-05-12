@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Administrador</title>
+</head>
+<body>
+<p>Página inicial de Administrador</p>
+
+<a href="/administrador/new">Cadastrar</a><br/>
+<a href="/administrador/lista">Lista</a><br/>
+<a href="/administrador/busca">Busca/alteração</a><br/>
+<a href="/administrador/apagar">Exclusão</a><br/>
+<a href="/">início</a>
+</body>
+</html>
